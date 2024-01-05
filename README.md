@@ -135,5 +135,5 @@ Array.from(document.querySelectorAll(".flex-auto>a")).map(item => `${item.innerT
   "sealos-minio-service",
   "sealos-pay-service",
   "sealos-objectstorage-frontend"
-].map(item => `${item.innerText}:latest`).join(',')
+].map(item => `${item}:latest`).join(',')
 ```
