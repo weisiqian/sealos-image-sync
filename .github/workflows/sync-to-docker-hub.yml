@@ -26,7 +26,12 @@ jobs:
       run: |
         IFS=',' read -ra IMAGES <<< "${{ github.event.inputs.image_names_tags }}"
         for image in "${IMAGES[@]}"; do
-          skopeo copy \
+          if skopeo copy \
             docker://ghcr.io/${{ github.repository_owner }}/$image \
-            docker://docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/$image
+            docker://docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/$image; then
+            echo "Successfully copied $image"
+          else
+            echo "Failed to copy $image, skipping..."
+          fi
         done
+
